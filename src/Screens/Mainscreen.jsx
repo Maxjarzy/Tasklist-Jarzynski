@@ -27,6 +27,28 @@ const Mainscreen = ({ tasklist }) => {
     setModalVisible(!modalVisible);
   };
 
+  const onPressStatus = (status) => {
+    const remainTask = list.filter(tasklist => tasklist.id !== taskActive.id)
+    const orderedList = [
+      ...remainTask,
+      {
+        ...taskActive,
+        completed : status
+      }
+    ].sort(function (a, b) {
+      if (a.id > b.id) {
+        return 1;
+      }
+      if (a.id < b.id) {
+        return -1;
+      }
+      return 0;
+    });
+    setList(orderedList)
+    setModalVisible(!modalVisible)
+  }
+
+
   return (
     <View style={styles.container}>
       <Topbar input={input} onAddTask={onAddTask} setInput={setInput} />
@@ -35,6 +57,7 @@ const Mainscreen = ({ tasklist }) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         taskActive={taskActive}
+        onPressStatus={onPressStatus}
       />
     </View>
   );

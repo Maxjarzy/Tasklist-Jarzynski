@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Modal, Pressable } from "react-native";
 import React from "react";
 
-const ModalTask = ({ modalVisible, setModalVisible, taskActive }) => {
+const ModalTask = ({ modalVisible, setModalVisible, taskActive, onPressStatus }) => {
   return (
     <Modal
       animationType="fade"
@@ -17,13 +17,13 @@ const ModalTask = ({ modalVisible, setModalVisible, taskActive }) => {
           <View style={styles.buttonContainer}>
             <Pressable
               style={[styles.button, styles.buttonDone]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => onPressStatus(true)}
             >
               <Text style={styles.textStyle}>Hecho</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonNotYet]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => onPressStatus(false)}
             >
               <Text style={styles.textStyle}>Pendiente</Text>
             </Pressable>
